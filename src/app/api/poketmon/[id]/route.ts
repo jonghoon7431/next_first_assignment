@@ -35,7 +35,7 @@ export const GET = async (
         const abilityResponse = await axios.get<UrlNames>(ability.ability.url);
         const koreanAbilityName =
           abilityResponse.data.names?.find(
-            (name: any) => name.language.name === "ko"
+            (name) => name.language.name === "ko"
           )?.name || ability.ability.name;
         return {
           ...ability,

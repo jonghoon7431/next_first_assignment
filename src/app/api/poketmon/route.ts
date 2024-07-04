@@ -2,20 +2,25 @@ import { Pokemon, Species } from "@/types/poketmon.type";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-const TOTAL_POKEMON = 151;
+const TOTAL_POKEMON: number = 151;
+const PAGE_PER_ITEM: number = 36;
 
 export const GET = async (request: Request) => {
   try {
-    const allPokemonPromises = Array.from(
-      { length: TOTAL_POKEMON },
-      (_, index) => {
-        const id = index + 1;
-        return Promise.all([
-          axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`),
-          axios.get<Species>(`https://pokeapi.co/api/v2/pokemon-species/${id}`),
-        ]);
-      }
-    );
+    const url: URL = new URL(request.url);
+    const page: number = parseInt(url.searchParams.get("page") || "1");
+    // offset: 데이터 페칭 시작점(건너뛸 항목 수)
+    const offset: number = (page - 1) * PAGE_PER_ITEM;
+    //limit: 한 페이지당 데이터 수
+    const limit: number = Math.min(PAGE_PER_ITEM, TOTAL_POKEMON - offset);
+
+    const allPokemonPromises = [...Array(limit)].map((_, index) => {
+      const id = offset + index + 1;
+      return Promise.all([
+        axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`),
+        axios.get<Species>(`https://pokeapi.co/api/v2/pokemon-species/${id}`),
+      ]);
+    });
 
     const allPokemonResponses = await Promise.all(allPokemonPromises);
 

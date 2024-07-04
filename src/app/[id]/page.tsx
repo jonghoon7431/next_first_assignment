@@ -1,6 +1,7 @@
 import { Pokemon } from "@/types/poketmon.type";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 
 const getTargetPokemon = async (id: string): Promise<Pokemon> => {
   const { data: pokemon } = await axios.get(
@@ -34,7 +35,6 @@ export default async function DetailPage({
 
   const pokemon = await getTargetPokemon(paramsId);
 
-  console.log(pokemon);
   const { id, korean_name, height, weight, sprites, types, abilities, moves } =
     pokemon;
 
@@ -86,12 +86,13 @@ export default async function DetailPage({
         <p className="text-2xl font-bold mb-4">스킬</p>
         <ul className="w-[80%] flex flex-wrap gap-4 justify-center">
           {moves.map((move) => (
-            <li className="">{move.move.korean_name}</li>
+            <li>{move.move.korean_name}</li>
           ))}
         </ul>
       </div>
+      <Link href={"/"}>
+        <button className="bg-slate-700 rounded-md m-2 p-1">뒤로가기</button>
+      </Link>
     </div>
   );
 }
-
-// export default page;
