@@ -64,16 +64,22 @@ export default async function DetailPage({
             <div>
               <ul className="flex gap-2 items-center">
                 타입 :
-                {types.map((type) => (
-                  <li className="rounded-md p-[0.25rem] bg-[#ED1D24]">
+                {types.map((type, index) => (
+                  <li
+                    key={index}
+                    className="rounded-md p-[0.25rem] bg-[#ED1D24]"
+                  >
                     {type.type.korean_name}
                   </li>
                 ))}
               </ul>
               <ul className="flex gap-2 items-center">
                 특성 :
-                {abilities.map((ability) => (
-                  <li className="rounded-md p-[0.25rem] bg-[#1E65B1]">
+                {abilities.map((ability, index) => (
+                  <li
+                    key={index}
+                    className="rounded-md p-[0.25rem] bg-[#1E65B1]"
+                  >
                     {ability.ability.korean_name}
                   </li>
                 ))}
@@ -85,8 +91,8 @@ export default async function DetailPage({
       <div className="flex flex-col items-center">
         <p className="text-2xl font-bold mb-4">스킬</p>
         <ul className="w-[80%] flex flex-wrap gap-4 justify-center">
-          {moves.map((move) => (
-            <li>{move.move.korean_name}</li>
+          {moves.map((move, index) => (
+            <li key={index}>{move.move.korean_name}</li>
           ))}
         </ul>
       </div>
