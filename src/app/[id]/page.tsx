@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const getTargetPokemon = async (id: string): Promise<Pokemon> => {
   const { data: pokemon } = await axios.get(
-    `http://localhost:3000/api/poketmon/${id}`
+    `https://pokedex-rouge-theta-13.vercel.app/${id}`
   );
   return pokemon;
 };
