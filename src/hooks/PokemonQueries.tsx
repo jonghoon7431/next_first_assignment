@@ -15,7 +15,7 @@ export const usePokemonQuery = ({ page }: Props) => {
     queryKey: ["pokemons", page],
     queryFn: async () => {
       const response = await axios.get(
-        `http://localhost:3000/api/poketmon?page=${page}`
+        `https://pokedex-rouge-theta-13.vercel.app/?page=${page}`
       );
 
       return response.data;
