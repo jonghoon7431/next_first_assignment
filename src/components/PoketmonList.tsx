@@ -26,20 +26,26 @@ const PokemonList = () => {
       <ul className="grid gap-4 grid-cols-6 grid-rows-6 content-center items-center p-6">
         {pokemons.map((pokemon) => {
           const { id, sprites, name, korean_name } = pokemon;
+
           return (
-            <Link href={`${id}`} key={id}>
-              <li className="flex flex-col items-center border border-gray-500 rounded-md cursor-pointer">
-                <Image
-                  src={sprites.front_default}
-                  width={100}
-                  height={100}
-                  alt={name}
-                />
-                <p>
-                  {id}.{korean_name}
-                </p>
-              </li>
-            </Link>
+            <li
+              key={id}
+              className="flex flex-col items-center border border-gray-500 rounded-md cursor-pointer"
+            >
+              <Link href={`${id}`}>
+                <div>
+                  <Image
+                    src={sprites.front_default}
+                    width={100}
+                    height={100}
+                    alt={name}
+                  />
+                  <p>
+                    {id}.{korean_name}
+                  </p>
+                </div>
+              </Link>
+            </li>
           );
         })}
       </ul>
