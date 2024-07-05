@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<br/>
 
-## Getting Started
+# NextJS 를 이용해 나만의 포켓몬 도감을 만들어 봅시다.
 
-First, run the development server:
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 필수 구현 사항
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- App router 기반, typescript 사용, tailwindcss 사용을 베이스로 한 Nextjs 14 버전으로 프로젝트 구성 :white_check_mark:
+- Layout : Metadata 설정, 전체 적용 UI 구현 :white_check_mark:
+-  151번까지의 포켓몬 리스트를 보여주는 페이지를 구현 (클라이언트 컴포넌트) :white_check_mark:
+-  특정 포켓몬의 디테일을 보여주는 페이지를 구현 (다이나믹 페이지 + 서버 컴포넌트) :white_check_mark:
+-  next.js 기본 제공 <Image> 사용 :white_check_mark:
+-  전체 코드에 적절한 타입 명시 :white_check_mark:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 선택 구현 사항
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- 151개의 데이터는 너무 방대합니다. tanstack query를 도입해 캐시 처리를 해봅시다 :white_check_mark:
+- 디테일 페이지는 각기 다른 metadata title이 있으면 좋을 것 같습니다 :white_check_mark:
+- 제공된 api handler에는 타입 추론이 많이 사용됩니다. axios에 적절한 타입을 지정해봅시다 :white_check_mark:
+- api를 변경해 151개 이상의 데이터를 불러와봅시다
+- 무한스크롤 or 페이지네이션을 구현해봅시다 :white_check_mark:
+- 원하는 DB에 좋아하는 포켓몬들 등록하는 로직을 API HANDLER를 사용해 구현해봅시다
 
-## Learn More
+<br/>
+<hr/>
 
-To learn more about Next.js, take a look at the following resources:
+### 페이지 미리보기
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![1](https://github.com/jonghoon7431/next_first_assignment/assets/152875407/b737178b-e1f9-4606-a929-696c01138f0c)
+![2](https://github.com/jonghoon7431/next_first_assignment/assets/152875407/53abfaec-8b30-4baa-83eb-c54c47ce2c9f)
