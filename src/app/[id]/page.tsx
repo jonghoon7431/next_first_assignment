@@ -1,6 +1,5 @@
 import { Pokemon } from "@/types/poketmon.type";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
 
 const getTargetPokemon = async (id: string): Promise<Pokemon> => {
@@ -47,7 +46,7 @@ export default async function DetailPage({
       <div>
         <div className="flex justify-center gap-[6rem]">
           <div>
-            <Image
+            <img
               className="w-[200px] h-[200px] bg-black flex justify-center items-center"
               src={sprites.front_default}
               width={100}

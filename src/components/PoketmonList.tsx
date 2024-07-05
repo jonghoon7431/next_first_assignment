@@ -1,7 +1,6 @@
 "use client";
 
 import usePokemonQuery from "@/hooks/PokemonQueries";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import MainPagination from "./Pagination";
@@ -34,7 +33,7 @@ const PokemonList = () => {
             >
               <Link href={`${id}`}>
                 <div>
-                  <Image
+                  <img
                     src={sprites.front_default}
                     width={100}
                     height={100}
