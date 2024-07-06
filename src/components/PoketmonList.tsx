@@ -2,16 +2,26 @@
 
 import usePokemonQuery from "@/hooks/PokemonQueries";
 import Link from "next/link";
-import { useState } from "react";
-import MainPagination from "./Pagination";
+import { useInView } from "react-intersection-observer";
 
 const PokemonList = () => {
-  const TOTAL_POKEMON: number = 151;
-  const ITEMS_PER_PAGE: number = 30;
-  const totalPage: number = Math.ceil(TOTAL_POKEMON / ITEMS_PER_PAGE);
+  //TODO 디테일 페이지에서 돌아올 때, 무한스크롤 초기화 방법 찾기
+  const {
+    pokemons,
+    pokemonsIsPending,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = usePokemonQuery({ page: 1 });
 
-  const [page, setPage] = useState<number>(1);
-  const { pokemons, pokemonsIsPending } = usePokemonQuery({ page });
+  const { ref } = useInView({
+    threshold: 1,
+    onChange: (inView) => {
+      if (inView && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    },
+  });
 
   if (pokemonsIsPending || !pokemons) {
     return <div>loading . . .</div>;
@@ -23,11 +33,12 @@ const PokemonList = () => {
         포켓몬 도감
       </h1>
       <ul className="grid gap-4 grid-cols-6 grid-rows-6 content-center items-center p-6">
-        {pokemons.map((pokemon) => {
+        {pokemons.map((pokemon, index) => {
           const { id, sprites, name, korean_name } = pokemon;
-
+          const isLastItem = pokemons.length - 1 === index;
           return (
             <li
+              ref={isLastItem ? ref : null}
               key={id}
               className="flex flex-col items-center border border-gray-500 rounded-md cursor-pointer"
             >
@@ -47,8 +58,8 @@ const PokemonList = () => {
             </li>
           );
         })}
+        {isFetchingNextPage && <div>load more . . </div>}
       </ul>
-      <MainPagination totalPage={totalPage} page={page} setPage={setPage} />
     </div>
   );
 };
